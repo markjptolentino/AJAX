@@ -1,0 +1,180 @@
+body {
+    font-family: 'Fira Code', monospace;
+    background: linear-gradient(135deg, #0d1b2a, #1b263b);
+    color: #00ff99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    background: url('https://img.icons8.com/emoji/80/rocket-emoji.png') no-repeat center;
+    background-size: contain;
+    animation: rocketLaunch 4s infinite ease-in-out;
+    z-index: 0;
+    transform: translateX(-50%);
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: 60%;
+    width: 60px;
+    height: 60px;
+    background: url('https://img.icons8.com/emoji/60/rocket-emoji.png') no-repeat center;
+    background-size: contain;
+    animation: rocketLaunch 5s infinite ease-in-out 1s;
+    z-index: 0;
+    transform: translateX(-50%);
+}
+
+canvas#matrix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.container {
+    text-align: center;
+    padding: 3.5rem;
+    background: rgba(0, 255, 153, 0.2);
+    border-radius: 30px;
+    box-shadow: 0 15px 60px rgba(0, 255, 153, 0.5);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(0, 255, 153, 0.7);
+    z-index: 2;
+    animation: pulse 3s infinite;
+}
+
+h1 {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 20px #00ff99, 0 0 40px #00ff99;
+    animation: glow 1.2s infinite alternate;
+}
+
+p {
+    font-size: 1.4rem;
+    margin: 0.7rem 0;
+}
+
+button {
+    padding: 1rem 2.5rem;
+    font-size: 1.3rem;
+    background: #ff0066;
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    margin: 0.7rem;
+    transition: transform 0.5s, box-shadow 0.5s;
+}
+
+button:hover {
+    transform: scale(1.25);
+    box-shadow: 0 0 25px #ff0066, 0 0 50px #ff0066;
+}
+
+.toggle-btn {
+    background: #00ccff;
+}
+
+.toggle-btn:hover {
+    box-shadow: 0 0 25px #00ccff, 0 0 50px #00ccff;
+}
+
+.quiz-btn {
+    background: #ff00ff;
+}
+
+.quiz-btn:hover {
+    box-shadow: 0 0 25px #ff00ff, 0 0 50px #ff00ff;
+}
+
+.reset-btn {
+    background: #ff9900;
+}
+
+.reset-btn:hover {
+    box-shadow: 0 0 25px #ff9900, 0 0 50px #ff9900;
+}
+
+.content-area {
+    margin-top: 3rem;
+    padding: 2.5rem;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 20px;
+    min-height: 180px;
+    border: 2px solid #00ff99;
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+    text-align: left;
+    transform: perspective(1000px) rotateX(10deg);
+    transition: transform 0.6s, background 0.6s;
+}
+
+.content-area.loaded {
+    animation: flash 0.8s;
+    transform: perspective(1000px) rotateX(0deg);
+}
+
+.loader {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #00ff99;
+    border-top-color: #ff0066;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    margin: 2rem auto;
+}
+
+#firewallLog {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    color: #00ff99;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    z-index: 3;
+}
+
+@keyframes rocketLaunch {
+    0% { transform: translateX(-50%) translateY(100vh); opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { transform: translateX(-50%) translateY(-100vh); opacity: 0.4; }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 20px #00ff99, 0 0 40px #00ff99; }
+    to { text-shadow: 0 0 30px #00ff99, 0 0 60px #00ff99; }
+}
+
+@keyframes flash {
+    0% { background: rgba(0, 255, 153, 0.8); }
+    100% { background: rgba(0, 0, 0, 0.8); }
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 15px 60px rgba(0, 255, 153, 0.5); }
+    50% { box-shadow: 0 15px 80px rgba(0, 255, 153, 0.7); }
+    100% { box-shadow: 0 15px 60px rgba(0, 255, 153, 0.5); }
+}

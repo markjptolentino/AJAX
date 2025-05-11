@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GatusSecGG: AJAX Cosmic Hack</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Link to CSS for neon-cyber styling with rocket and matrix effects -->
+</head>
+<body>
+    <canvas id="matrix"></canvas>
+    <!-- Canvas for matrix rain background -->
+    <div class="container">
+        <h1>🔒 Welcome to GatusSecGG</h1>
+        <!-- Core GatusSecGG branding with cybersecurity focus -->
+        <p>Dominate cybersecurity, software, and web dev!</p>
+        <button onclick="loadContent()" id="launchBtn">Launch Payload</button>
+        <!-- Button to trigger secure AJAX request with sound -->
+        <button onclick="toggleContent()" class="toggle-btn">Switch Payload</button>
+        <!-- Button to cycle content sources -->
+        <button onclick="startQuiz()" class="quiz-btn">Cyber Quiz</button>
+        <!-- Button to launch interactive quiz -->
+        <button onclick="resetContent()" class="reset-btn">Reset Mission</button>
+        <!-- Button to reset for replayability -->
+        <div id="contentArea" class="content-area terminal">
+            <!-- 3D terminal for dynamic content -->
+            <p>Click "Launch Payload" to hack the GatusSecGG data!</p>
+        </div>
+        <pre id="firewallLog">Firewall: Awaiting AJAX request...</pre>
+        <!-- Mock firewall log for cyber narrative -->
+    </div>
+
+    <script>
+        // Initialize audio for button clicks
+        const clickSound = new Audio('https://freesound.org/data/previews/171/171671_2437358-lq.mp3');
+
+        // Content sources for randomized loading
+        const contentSources = ['content.html', 'content2.html'];
+        let currentSourceIndex = 0;
+
+        // Function to load content securely via AJAX
+        function loadContent() {
+            clickSound.play(); // Play sci-fi beep
+            // Initialize XMLHttpRequest for secure data transfer
+            let xhr = new XMLHttpRequest();
+
+            // Select random or current content source
+            const source = contentSources[currentSourceIndex];
+
+            // Configure GET request with async handling
+            xhr.open('GET', source, true);
+
+            // Display loading animation
+            document.getElementById('contentArea').innerHTML = '<div class="loader"></div>';
+            document.getElementById('firewallLog').textContent = 'Firewall: AJAX request initiated...';
+
+            // Handle state changes with secure validation
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        // Securely inject response with terminal effect
+                        document.getElementById('contentArea').innerHTML = xhr.responseText;
+                        document.getElementById('contentArea').classList.add('loaded');
+                        document.getElementById('firewallLog').textContent = 
+                            'Firewall: Payload deployed successfully!';
+                    } else {
+                        // Handle errors with secure messaging
+                        document.getElementById('contentArea').innerHTML = 
+                            '<p>⚠️ Cyber Alert: Payload deployment failed! Strengthen defenses.</p>';
+                        document.getElementById('firewallLog').textContent = 
+                            'Firewall: Intrusion detected!';
+                    }
+                }
+            };
+
+            // Send the request
+            xhr.send();
+        }
+
+        // Function to toggle content sources
+        function toggleContent() {
+            clickSound.play();
+            currentSourceIndex = (currentSourceIndex + 1) % contentSources.length;
+            loadContent();
+        }
+
+        // Function to reset content area
+        function resetContent() {
+            clickSound.play();
+            document.getElementById('contentArea').innerHTML = 
+                '<p>Click "Launch Payload" to hack the GatusSecGG data!</p>';
+            document.getElementById('contentArea').classList.remove('loaded');
+            document.getElementById('firewallLog').textContent = 'Firewall: Awaiting AJAX request...';
+        }
+
+        // Function to launch cyber quiz
+        function startQuiz() {
+            clickSound.play();
+            const questions = [
+                {
+                    q: 'What’s a risk of unvalidated AJAX responses?',
+                    a: 'XSS attacks'
+                },
+                {
+                    q: 'What HTTP method is used for secure data submission?',
+                    a: 'POST'
+                }
+            ];
+            const randomQ = questions[Math.floor(Math.random() * questions.length)];
+            const answer = prompt(randomQ.q);
+            document.getElementById('contentArea').innerHTML = 
+                answer && answer.toLowerCase() === randomQ.a.toLowerCase() 
+                    ? '<p>🎉 Cyber Elite: Correct! You’re a GatusSecGG master!</p>'
+                    : '<p>⚠️ Try Again: Study harder, cyber warrior!</p>';
+        }
+
+        // Matrix rain effect
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+        const chars = 'GatusSecGG0123456789@#$%';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff99';
+            ctx.font = fontSize + 'px monospace';
+            drops.forEach((y, i) => {
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                ctx.fillText(text, i * fontSize, y * fontSize);
+                if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            });
+        }
+        setInterval(drawMatrix, 33);
+    </script>
+</body>
+</html>
